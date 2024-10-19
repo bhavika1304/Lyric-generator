@@ -1,5 +1,5 @@
 fastapi
 uvicorn
 transformers
-torch
-tensorflow==2.17.0  # or the version you're using
+tensorflow==2.17.0
+tf-keras==2.12.0  
