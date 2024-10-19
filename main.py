@@ -17,14 +17,14 @@ class LyricsInput(BaseModel):
 # Initialize FastAPI app
 app = FastAPI()
 
+# Load the model once at startup
+lyric_generator = pipeline('text-generation', model='gpt2', pad_token_id=50256)
+
 logging.basicConfig(level=logging.INFO)
 
 # Create the lyrics generation endpoint
 @app.post("/generate_lyrics")
 async def generate_lyrics(input: LyricsInput):
-    # Load the model inside the endpoint
-    lyric_generator = pipeline('text-generation', model='gpt2', pad_token_id=50256)
-
     prompt = f"Write a {input.genre} song in {input.language} about {input.description}"
 
     # Ensure the total length of the prompt is reasonable
