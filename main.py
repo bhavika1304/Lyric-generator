@@ -34,8 +34,11 @@ async def generate_lyrics(input: LyricsInput):
     # Generate lyrics
     try:
         generated_lyrics = lyric_generator(prompt, max_length=100, num_return_sequences=1)[0]['generated_text']
-    except Exception as e:
+    except (ValueError, TypeError) as e:
         logging.error(f"Error generating lyrics: {str(e)}")
+        return JSONResponse(content={"error": "Invalid input parameters."}, status_code=400)
+    except Exception as e:
+        logging.error(f"Unexpected error generating lyrics: {str(e)}")
         return JSONResponse(content={"error": "Failed to generate lyrics."}, status_code=500)
 
     # Truncate the output if it exceeds 300 characters
