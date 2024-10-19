@@ -23,7 +23,7 @@ logging.basicConfig(level=logging.INFO)
 @app.post("/generate_lyrics")
 async def generate_lyrics(input: LyricsInput):
     # Load the model inside the endpoint
-    lyric_generator = pipeline('text-generation', model='gpt2-small', pad_token_id=50256)
+    lyric_generator = pipeline('text-generation', model='gpt2', pad_token_id=50256)
 
     prompt = f"Write a {input.genre} song in {input.language} about {input.description}"
 
