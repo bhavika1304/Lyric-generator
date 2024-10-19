@@ -17,8 +17,8 @@ class LyricsInput(BaseModel):
 # Initialize FastAPI app
 app = FastAPI()
 
-# Load the model once at startup
-lyric_generator = pipeline('text-generation', model='gpt2', pad_token_id=50256)
+# Load the model once at startup using PyTorch
+lyric_generator = pipeline('text-generation', model='gpt2', pad_token_id=50256, framework='pt')
 
 logging.basicConfig(level=logging.INFO)
 
